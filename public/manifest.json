@@ -1,0 +1,225 @@
+
+{
+  "name": "Chemistry Explorer",
+  "short_name": "ChemExplorer",
+  "description": "Interactive chemistry application for exploring elements and reactions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#9b87f5",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "offline_enabled": true,
+  "orientation": "any",
+  "categories": ["education", "science", "chemistry"],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/screenshot3.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Periodic Table",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icons/shortcuts/table.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Chemical Reactions",
+      "url": "/reactions",
+      "icons": [
+        {
+          "src": "/icons/shortcuts/reaction.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Learn Chemistry",
+      "url": "/learn",
+      "icons": [
+        {
+          "src": "/icons/shortcuts/learn.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Quiz",
+      "url": "/quiz",
+      "icons": [
+        {
+          "src": "/icons/shortcuts/quiz.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "lang": "en-US",
+  "dir": "ltr",
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "capture_links": "new-client",
+  "file_handlers": [
+    {
+      "action": "/open-file",
+      "accept": {
+        "chemical/*": [".mol", ".xyz", ".pdb"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+chem",
+      "url": "/protocol?url=%s"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": ["auto", "focus-existing"]
+  },
+  "widgets": [
+    {
+      "name": "Element of the Day",
+      "short_name": "Element",
+      "description": "Shows a different element each day",
+      "tag": "element",
+      "source": "widget.html",
+      "icons": [
+        {
+          "src": "/icons/element-widget.png",
+          "sizes": "192x192"
+        }
+      ],
+      "screenshots": [
+        {
+          "src": "/screenshots/widget.png",
+          "sizes": "1080x1920",
+          "label": "Element of the Day widget"
+        }
+      ]
+    }
+  ],
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "scope": "/",
+  "sync_with_server": true,
+  "auto_update_interval": 86400,
+  "offline_data": {
+    "resources": [
+      "/",
+      "/offline.html",
+      "/index.html",
+      "/service-worker.js",
+      "/manifest.json",
+      "/assets/index.css",
+      "/assets/index.js",
+      "/assets/placeholder.svg",
+      "/learn",
+      "/reactions",
+      "/quiz",
+      "/search"
+    ],
+    "max_size": 50000000
+  },
+  "update_via_cache": "none",
+  "background_fetch": {
+    "resources": [
+      "/assets/videos/reactions/",
+      "/assets/resources/"
+    ]
+  },
+  "permissions": ["offline-files"],
+  "version": "2.0.1",
+  "translations": [
+    {
+      "lang": "en-US",
+      "name": "Chemistry Explorer",
+      "short_name": "ChemExplorer",
+      "description": "Interactive chemistry application for exploring elements and reactions"
+    },
+    {
+      "lang": "vi",
+      "name": "Khám Phá Hóa Học",
+      "short_name": "KhámPhá",
+      "description": "Ứng dụng hóa học tương tác để khám phá các nguyên tố và phản ứng"
+    }
+  ],
+  "cross_origin_embedder_policy": {
+    "value": "require-corp"
+  },
+  "cross_origin_opener_policy": {
+    "value": "same-origin"
+  }
+}

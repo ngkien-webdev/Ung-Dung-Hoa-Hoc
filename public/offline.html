@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry Explorer - Offline</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 500px;
+      padding: 40px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: #9b87f5;
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      margin: 1rem 0;
+      line-height: 1.5;
+    }
+    
+    .offline-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      color: #9b87f5;
+    }
+    
+    .button {
+      display: inline-block;
+      background-color: #9b87f5;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+    
+    .button:hover {
+      background-color: #7e69ab;
+    }
+    
+    .cached-resources {
+      margin-top: 30px;
+      text-align: left;
+      width: 100%;
+    }
+    
+    .cached-resources h3 {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .resource-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    
+    .resource-item {
+      padding: 8px 12px;
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <svg class="offline-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.69,11.075A10.476,10.476,0,0,1,12,3.074a10.23,10.23,0,0,1,5.454,1.55M22.31,11.075a10.476,10.476,0,0,0-3.346-5.471" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M4.604,15.656A9.513,9.513,0,0,1,3.69,13.075M20.31,13.075a9.513,9.513,0,0,1-.914,2.581" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M7.86,18.414A7.532,7.532,0,0,1,7,16.075a7.412,7.412,0,0,1,7-7.394,7.412,7.412,0,0,1,7,7.394,7.532,7.532,0,0,1-.86,2.339" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12,8.681v4.394" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="2" y1="22" x2="22" y2="2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    
+    <h1>You're offline</h1>
+    <p>It looks like you lost your internet connection. Don't worry - you can still access cached content from the Chemistry Explorer app.</p>
+    
+    <a href="/" class="button">Try Again</a>
+    
+    <div class="cached-resources">
+      <h3>Available Offline:</h3>
+      <div class="resource-list">
+        <div class="resource-item">Periodic Table</div>
+        <div class="resource-item">Saved Elements</div>
+        <div class="resource-item">Basic Reactions</div>
+        <div class="resource-item">Learning Materials</div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Check if we're back online
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+    
+    // Check for cached content
+    async function checkCachedContent() {
+      if ('caches' in window) {
+        try {
+          const cache = await caches.open('chemistry-app-v1');
+          const cachedKeys = await cache.keys();
+          
+          const resourceList = document.querySelector('.resource-list');
+          resourceList.innerHTML = '';
+          
+          // Show the first 6 cached resources or a message if none
+          if (cachedKeys.length > 0) {
+            cachedKeys.slice(0, 6).forEach(request => {
+              const url = new URL(request.url);
+              const path = url.pathname;
+              const resourceName = path.split('/').pop() || path;
+              
+              const item = document.createElement('div');
+              item.className = 'resource-item';
+              item.textContent = resourceName;
+              resourceList.appendChild(item);
+            });
+          } else {
+            const item = document.createElement('div');
+            item.className = 'resource-item';
+            item.style.gridColumn = '1 / span 2';
+            item.textContent = 'No cached content available';
+            resourceList.appendChild(item);
+          }
+        } catch (error) {
+          console.error('Error checking cached content', error);
+        }
+      }
+    }
+    
+    checkCachedContent();
+  </script>
+</body>
+</html>

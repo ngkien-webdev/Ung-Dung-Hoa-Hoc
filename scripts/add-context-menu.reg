@@ -1,0 +1,9 @@
+
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\chemistry_explorer]
+@="Open Chemistry Explorer Here"
+"Icon"="%PROGRAMFILES%\\chemistry-explorer\\icons\\icon-144x144.png"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\chemistry_explorer\command]
+@="cmd.exe /c \"cd /d \"%V\" && START \"\" \"%PROGRAMFILES%\\chemistry-explorer\\start-chemistry-app.bat\"\""
